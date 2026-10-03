@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MFA Security Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-header">
+
+            <div>
+                <p class="dashboard-label">
+                    SECURITY DASHBOARD
+                </p>
+
+                <h1>
+                    MFA Authentication
+                </h1>
+
+                <p class="dashboard-welcome">
+                    Welcome, {{ username }}
+                </p>
+            </div>
+
+            <div class="security-badge">
+                ✓ SECURE
+            </div>
+
+        </div>
+
+
+        <div class="status-box">
+
+            <div class="status-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <h2>
+                    Authentication Successful
+                </h2>
+
+                <p>
+                    Your identity has been verified using
+                    password + one-time password.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🔑
+                </div>
+
+                <h3>
+                    Password
+                </h3>
+
+                <p>
+                    Verified
+                </p>
+
+                <span class="success-text">
+                    ✓ Valid
+                </span>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🔐
+                </div>
+
+                <h3>
+                    MFA Token
+                </h3>
+
+                <p>
+                    OTP Verified
+                </p>
+
+                <span class="success-text">
+                    ✓ Valid
+                </span>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    ☁️
+                </div>
+
+                <h3>
+                    Cloud Status
+                </h3>
+
+                <p>
+                    Ready
+                </p>
+
+                <span class="pending-text">
+                    Cloud Logging
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="activity-section">
+
+            <h2>
+                Authentication Details
+            </h2>
+
+            <div class="activity-row">
+
+                <span>
+                    Username
+                </span>
+
+                <strong>
+                    {{ username }}
+                </strong>
+
+            </div>
+
+
+            <div class="activity-row">
+
+                <span>
+                    Authentication Method
+                </span>
+
+                <strong>
+                    Password + TOTP
+                </strong>
+
+            </div>
+
+
+            <div class="activity-row">
+
+                <span>
+                    MFA Status
+                </span>
+
+                <strong class="success-text">
+                    VERIFIED
+                </strong>
+
+            </div>
+
+
+            <div class="activity-row">
+
+                <span>
+                    Access Status
+                </span>
+
+                <strong class="success-text">
+                    GRANTED
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-footer">
+
+            <p>
+                🔒 MFA Physical Token Simulator
+            </p>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

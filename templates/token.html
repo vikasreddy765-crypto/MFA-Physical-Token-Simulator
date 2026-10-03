@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MFA Physical Token</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="token-container">
+
+    <div class="token-card">
+
+        <div class="token-icon">
+            🔐
+        </div>
+
+        <h1>PHYSICAL MFA TOKEN</h1>
+
+        <p class="welcome">
+            Welcome, {{ username }}
+        </p>
+
+
+        {% if locked %}
+
+            <div class="locked-box">
+
+                <div class="locked-icon">
+                    🚫
+                </div>
+
+                <h2>ACCOUNT LOCKED</h2>
+
+                <p>
+                    Too many incorrect OTP attempts.
+                </p>
+
+                <p>
+                    Please login again to start a new session.
+                </p>
+
+                <a href="/">
+                    <button type="button">
+                        RETURN TO LOGIN
+                    </button>
+                </a>
+
+            </div>
+
+
+        {% else %}
+
+            <div class="physical-token">
+
+                <div class="token-label">
+                    ONE-TIME PASSWORD
+                </div>
+
+                <div class="otp-display">
+                    {{ otp }}
+                </div>
+
+                <div class="timer-label">
+                    Expires in
+                </div>
+
+                <div class="countdown">
+
+                    <span id="timer">
+                        {{ remaining_seconds }}
+                    </span>
+
+                    seconds
+
+                </div>
+
+                <div class="token-status">
+                    ● TOKEN ACTIVE
+                </div>
+
+            </div>
+
+
+            <form action="/verify-otp"
+                  method="POST">
+
+                <label for="otp">
+                    Enter OTP
+                </label>
+
+                <input
+                    type="text"
+                    id="otp"
+                    name="otp"
+                    maxlength="6"
+                    pattern="[0-9]{6}"
+                    placeholder="Enter 6-digit OTP"
+                    required
+                    autocomplete="off"
+                >
+
+                <button type="submit">
+                    VERIFY OTP
+                </button>
+
+            </form>
+
+
+            {% if error %}
+
+                <p class="error">
+                    {{ error }}
+                </p>
+
+            {% endif %}
+
+
+            <p class="attempt-info">
+
+                Failed Attempts:
+                {{ attempts or 0 }} / 3
+
+            </p>
+
+
+            <p class="security-note">
+
+                🔒 OTP is valid for only 30 seconds.
+
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+{% if not locked %}
+
+<script>
+
+let remaining = {{ remaining_seconds }};
+
+const timerElement =
+    document.getElementById("timer");
+
+
+const countdown =
+    setInterval(function () {
+
+        remaining--;
+
+        timerElement.textContent =
+            remaining;
+
+
+        if (remaining <= 0) {
+
+            clearInterval(countdown);
+
+            location.reload();
+
+        }
+
+    }, 1000);
+
+</script>
+
+{% endif %}
+
+</body>
+
+</html>
